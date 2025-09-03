@@ -63,14 +63,18 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            padding-bottom: 80px;
         }
         
         .message-form {
             padding: 15px 20px;
             border-top: 1px solid #dbdbdb;
             background: white;
-            position: sticky;
+            position: fixed;
             bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
         }
         
         .form-group {
@@ -327,9 +331,10 @@
         
         .admin-theme .content {
             background: #0b141a;
-            flex: none;
+            flex: 1;
             overflow-y: auto;
             min-height: auto;
+            padding-bottom: 80px;
         }
         
         .admin-theme .conversation-list {
@@ -422,6 +427,7 @@
             background: #0b141a;
             background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" opacity="0.05"><rect width="40" height="40" fill="%23e9edef"/></svg>');
             padding: 20px;
+            margin-bottom: 80px;
         }
         
         .admin-theme .message {
@@ -459,6 +465,11 @@
             background: #2a3942;
             border-top: 1px solid #3b4a54;
             padding: 16px 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
         }
         
         .admin-theme .message-input-container {
