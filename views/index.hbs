@@ -1,55 +1,65 @@
 <div class="container">
     <div class="header">
-        <h1>💬 Ask Me Anything</h1>
-        <p>Send me anonymous messages and questions. I'll reply here!</p>
+        <h1>Anonymous Chat</h1>
     </div>
     
     <div class="content">
         {{#if (lookup (query) 'success')}}
             <div class="alert alert-success">
-                ✅ Your message has been sent successfully!
+                Message sent!
             </div>
         {{/if}}
         
         {{#if (lookup (query) 'error')}}
             <div class="alert alert-error">
                 {{#if (eq (lookup (query) 'error') 'empty')}}
-                    ❌ Please enter a message before sending.
+                    Please enter a message
                 {{else}}
-                    ❌ Failed to send message. Please try again.
+                    Failed to send message
                 {{/if}}
             </div>
         {{/if}}
         
-        <div class="message-form">
-            <form method="POST" action="/send-message">
-                <div class="form-group">
-                    <label for="message">Your Anonymous Message:</label>
-                    <textarea name="message" id="message" placeholder="Ask me anything... Your identity will remain completely anonymous!" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message 📤</button>
-            </form>
-        </div>
-        
         {{#if messages}}
             <div class="messages">
-                <h3>Our Conversation:</h3>
                 {{#each messages}}
                     <div class="message {{#if is_admin_reply}}admin{{else}}user{{/if}}">
-                        {{#if is_admin_reply}}
-                            <strong>💭 Reply:</strong>
-                        {{else}}
-                            <strong>📝 You:</strong>
-                        {{/if}}
-                        <p>{{message}}</p>
-                        <div class="message-time">{{formatDate created_at}}</div>
+                        <p class="message-content">{{message}}</p>
                     </div>
+                    <div class="message-time">{{formatDate created_at}}</div>
                 {{/each}}
             </div>
         {{else}}
-            <div style="text-align: center; padding: 40px; color: #666;">
+            <div class="empty-state">
                 <p>👋 Start the conversation by sending your first anonymous message!</p>
             </div>
         {{/if}}
+        
+        <div class="message-form">
+            <form method="POST" action="/send-message" id="messageForm">
+                <div class="form-group">
+                    <label for="message">Your Anonymous Message:</label>
+                    <div class="message-input-container">
+                        <textarea name="message" id="message" placeholder="Message..." required rows="1"></textarea>
+                        <button type="submit" class="btn">➤</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+<script>
+// Auto-resize textarea
+const textarea = document.getElementById('message');
+textarea.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+
+// Auto-scroll to bottom
+const messages = document.querySelector('.messages');
+if (messages) {
+    messages.scrollTop = messages.scrollHeight;
+}
+</script>
