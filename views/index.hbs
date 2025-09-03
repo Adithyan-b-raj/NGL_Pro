@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container admin-theme">
     <div class="header">
         <h1>Anonymous Chat</h1>
     </div>
@@ -62,4 +62,31 @@ const messages = document.querySelector('.messages');
 if (messages) {
     messages.scrollTop = messages.scrollHeight;
 }
+
+// Auto-refresh for new messages every 3 seconds
+setInterval(function() {
+    // Only refresh if we're on the main page and not actively typing
+    if (window.location.pathname === '/' && document.activeElement !== textarea) {
+        fetch(window.location.href)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const newDoc = parser.parseFromString(html, 'text/html');
+                const newMessages = newDoc.querySelector('.messages');
+                const currentMessages = document.querySelector('.messages');
+                
+                if (newMessages && currentMessages) {
+                    // Only update if content changed
+                    if (newMessages.innerHTML !== currentMessages.innerHTML) {
+                        currentMessages.innerHTML = newMessages.innerHTML;
+                        currentMessages.scrollTop = currentMessages.scrollHeight;
+                    }
+                } else if (newMessages && !currentMessages) {
+                    // First message received, reload page
+                    window.location.reload();
+                }
+            })
+            .catch(error => console.log('Auto-refresh error:', error));
+    }
+}, 3000);
 </script>

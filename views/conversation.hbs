@@ -72,4 +72,37 @@ const messages = document.querySelector('.messages');
 if (messages) {
     messages.scrollTop = messages.scrollHeight;
 }
+
+// Auto-refresh for new messages every 3 seconds
+setInterval(function() {
+    // Only refresh if not actively typing
+    if (document.activeElement !== replyTextarea) {
+        fetch(window.location.href)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const newDoc = parser.parseFromString(html, 'text/html');
+                const newMessages = newDoc.querySelector('.messages');
+                const currentMessages = document.querySelector('.messages');
+                
+                if (newMessages && currentMessages) {
+                    // Only update if content changed
+                    if (newMessages.innerHTML !== currentMessages.innerHTML) {
+                        const scrollTop = currentMessages.scrollTop;
+                        const scrollHeight = currentMessages.scrollHeight;
+                        const clientHeight = currentMessages.clientHeight;
+                        const wasAtBottom = scrollTop + clientHeight >= scrollHeight - 5;
+                        
+                        currentMessages.innerHTML = newMessages.innerHTML;
+                        
+                        // Maintain scroll position or auto-scroll if was at bottom
+                        if (wasAtBottom) {
+                            currentMessages.scrollTop = currentMessages.scrollHeight;
+                        }
+                    }
+                }
+            })
+            .catch(error => console.log('Auto-refresh error:', error));
+    }
+}, 3000);
 </script>

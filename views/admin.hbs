@@ -31,3 +31,28 @@
         {{/if}}
     </div>
 </div>
+
+<script>
+// Auto-refresh admin dashboard every 5 seconds for new conversations
+setInterval(function() {
+    fetch(window.location.href)
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const newDoc = parser.parseFromString(html, 'text/html');
+            const newConversationList = newDoc.querySelector('.conversation-list');
+            const currentConversationList = document.querySelector('.conversation-list');
+            
+            if (newConversationList && currentConversationList) {
+                // Only update if content changed
+                if (newConversationList.innerHTML !== currentConversationList.innerHTML) {
+                    currentConversationList.innerHTML = newConversationList.innerHTML;
+                }
+            } else if (newConversationList && !currentConversationList) {
+                // First conversation received, reload page
+                window.location.reload();
+            }
+        })
+        .catch(error => console.log('Auto-refresh error:', error));
+}, 5000);
+</script>
