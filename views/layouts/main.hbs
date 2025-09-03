@@ -276,6 +276,231 @@
                 max-width: 80%;
             }
         }
+        
+        /* WhatsApp Dark Theme for Admin Pages */
+        .admin-theme {
+            background: #0b141a;
+            color: #e9edef;
+        }
+        
+        .admin-theme .container {
+            background: #111b21;
+            max-width: 100%;
+        }
+        
+        .admin-theme .header {
+            background: #2a3942;
+            color: #e9edef;
+            border-bottom: 1px solid #3b4a54;
+            padding: 16px 20px;
+        }
+        
+        .admin-theme .header h1 {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .admin-theme .admin-nav {
+            background: #2a3942;
+            border-bottom: 1px solid #3b4a54;
+            padding: 12px 20px;
+        }
+        
+        .admin-theme .admin-nav a {
+            color: #00a884;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .admin-theme .admin-nav a:hover {
+            color: #06cf9c;
+        }
+        
+        .admin-theme .content {
+            background: #0b141a;
+        }
+        
+        .admin-theme .conversation-list {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .admin-theme .conversation-card {
+            background: #111b21;
+            border: none;
+            border-bottom: 1px solid #3b4a54;
+            border-radius: 0;
+            padding: 16px 20px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .admin-theme .conversation-card:hover {
+            background: #2a3942;
+        }
+        
+        .admin-theme .conversation-meta {
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .admin-theme .session-id {
+            background: transparent;
+            color: #e9edef;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 0;
+        }
+        
+        .admin-theme .message-count {
+            background: #00a884;
+            color: white;
+            font-size: 12px;
+            border-radius: 12px;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+        }
+        
+        .admin-theme .conversation-card p {
+            color: #8696a0;
+            font-size: 14px;
+            margin: 2px 0;
+        }
+        
+        .admin-theme .conversation-card strong {
+            color: #8696a0;
+        }
+        
+        .admin-theme .btn {
+            background: #00a884;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: auto;
+            height: auto;
+            margin-top: 8px;
+        }
+        
+        .admin-theme .btn:hover {
+            background: #06cf9c;
+            transform: none;
+        }
+        
+        .admin-theme .btn-secondary {
+            background: #3b4a54;
+            color: #e9edef;
+            margin-left: 8px;
+        }
+        
+        .admin-theme .btn-secondary:hover {
+            background: #4a5862;
+        }
+        
+        /* WhatsApp Chat Messages for Admin */
+        .admin-theme .messages {
+            background: #0b141a;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" opacity="0.05"><rect width="40" height="40" fill="%23e9edef"/></svg>');
+            padding: 20px;
+        }
+        
+        .admin-theme .message {
+            background: transparent;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            max-width: 75%;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .admin-theme .message.user {
+            background: #2a3942;
+            color: #e9edef;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+        
+        .admin-theme .message.admin {
+            background: #005c4b;
+            color: #e9edef;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+        
+        .admin-theme .message-time {
+            color: #8696a0;
+            font-size: 11px;
+            margin-top: 4px;
+            text-align: right;
+        }
+        
+        .admin-theme .message-form {
+            background: #2a3942;
+            border-top: 1px solid #3b4a54;
+            padding: 16px 20px;
+        }
+        
+        .admin-theme .message-input-container {
+            background: #2a3942;
+            border: 1px solid #3b4a54;
+            border-radius: 8px;
+        }
+        
+        .admin-theme textarea {
+            background: transparent;
+            color: #e9edef;
+        }
+        
+        .admin-theme textarea::placeholder {
+            color: #8696a0;
+        }
+        
+        .admin-theme .alert {
+            background: #1f2937;
+            color: #e9edef;
+            border: 1px solid #3b4a54;
+        }
+        
+        .admin-theme .alert-success {
+            background: #064e3b;
+            color: #86efac;
+            border-color: #00a884;
+        }
+        
+        .admin-theme .alert-error {
+            background: #7f1d1d;
+            color: #fca5a5;
+            border-color: #dc2626;
+        }
+        
+        .admin-theme .empty-state {
+            color: #8696a0;
+        }
+        
+        .admin-theme .conversation-info {
+            padding: 16px 20px;
+            background: #2a3942;
+            border-bottom: 1px solid #3b4a54;
+            font-size: 14px;
+        }
+        
+        .admin-theme .conversation-info p {
+            color: #8696a0;
+            margin: 4px 0;
+        }
+        
+        .admin-theme .conversation-info strong {
+            color: #e9edef;
+        }
     </style>
 </head>
 <body>
