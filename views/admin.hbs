@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="admin-nav">
+        <a href="/admin">🔧 Admin Dashboard</a>
+    </div>
+    
+    <div class="header">
+        <h1>🛠️ Admin Dashboard</h1>
+        <p>Manage anonymous conversations and replies</p>
+    </div>
+    
+    <div class="content">
+        <h2>Recent Conversations</h2>
+        
+        {{#if conversations}}
+            <div class="conversation-list">
+                {{#each conversations}}
+                    <div class="conversation-card">
+                        <div class="conversation-meta">
+                            <span class="session-id">{{session_id}}</span>
+                            <span class="message-count">{{message_count}} messages</span>
+                        </div>
+                        <p><strong>Started:</strong> {{formatDate created_at}}</p>
+                        <p><strong>Last Activity:</strong> {{formatDate last_activity}}</p>
+                        {{#if last_message_time}}
+                            <p><strong>Last Message:</strong> {{formatDate last_message_time}}</p>
+                        {{/if}}
+                        <div style="margin-top: 15px;">
+                            <a href="/admin/conversation/{{id}}" class="btn">View Conversation 👁️</a>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <div style="text-align: center; padding: 40px; color: #666;">
+                <p>📭 No conversations yet. Share your anonymous message link to start receiving messages!</p>
+            </div>
+        {{/if}}
+    </div>
+</div>

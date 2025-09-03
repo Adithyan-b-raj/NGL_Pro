@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="admin-nav">
+        <a href="/admin">← Back to Dashboard</a>
+    </div>
+    
+    <div class="header">
+        <h1>💬 Conversation</h1>
+        <p>Session: {{conversation.session_id}}</p>
+    </div>
+    
+    <div class="content">
+        {{#if (lookup (query) 'success')}}
+            <div class="alert alert-success">
+                ✅ Reply sent successfully!
+            </div>
+        {{/if}}
+        
+        {{#if (lookup (query) 'error')}}
+            <div class="alert alert-error">
+                {{#if (eq (lookup (query) 'error') 'empty')}}
+                    ❌ Please enter a reply before sending.
+                {{else}}
+                    ❌ Failed to send reply. Please try again.
+                {{/if}}
+            </div>
+        {{/if}}
+        
+        <div class="conversation-info">
+            <p><strong>Started:</strong> {{formatDate conversation.created_at}}</p>
+            <p><strong>Last Activity:</strong> {{formatDate conversation.last_activity}}</p>
+        </div>
+        
+        {{#if messages}}
+            <div class="messages">
+                <h3>Messages:</h3>
+                {{#each messages}}
+                    <div class="message {{#if is_admin_reply}}admin{{else}}user{{/if}}">
+                        {{#if is_admin_reply}}
+                            <strong>🛠️ You (Admin):</strong>
+                        {{else}}
+                            <strong>👤 Anonymous User:</strong>
+                        {{/if}}
+                        <p>{{message}}</p>
+                        <div class="message-time">{{formatDate created_at}}</div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/if}}
+        
+        <div class="message-form">
+            <h3>Send Reply:</h3>
+            <form method="POST" action="/admin/reply/{{conversation.id}}">
+                <div class="form-group">
+                    <label for="reply">Your Reply:</label>
+                    <textarea name="reply" id="reply" placeholder="Type your reply to this anonymous user..." required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Reply 📤</button>
+                <a href="/admin" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
