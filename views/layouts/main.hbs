@@ -23,10 +23,16 @@
             max-width: 480px;
             margin: 0 auto;
             background: white;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .admin-theme.container {
+            height: auto;
+            min-height: 100vh;
+            max-width: 100%;
         }
         
         .header {
@@ -286,6 +292,9 @@
         .admin-theme .container {
             background: #111b21;
             max-width: 100%;
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto;
         }
         
         .admin-theme .header {
@@ -318,6 +327,9 @@
         
         .admin-theme .content {
             background: #0b141a;
+            flex: none;
+            overflow-y: auto;
+            min-height: auto;
         }
         
         .admin-theme .conversation-list {
