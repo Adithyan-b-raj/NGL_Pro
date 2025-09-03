@@ -1,0 +1,107 @@
+<div class="container admin-theme">
+    <div class="header">
+        <h1>Admin Login</h1>
+    </div>
+    
+    <div class="content">
+        {{#if (lookup (query) 'error')}}
+            <div class="alert alert-error">
+                {{#if (eq (lookup (query) 'error') 'invalid')}}
+                    Invalid username or password
+                {{else}}
+                    Login failed. Please try again.
+                {{/if}}
+            </div>
+        {{/if}}
+        
+        <div class="login-form">
+            <form method="POST" action="/admin/login" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <div class="message-input-container">
+                        <input type="text" name="username" id="username" placeholder="Enter username" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <div class="message-input-container">
+                        <input type="password" name="password" id="password" placeholder="Enter password" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn login-btn">Login 🔐</button>
+            </form>
+        </div>
+        
+        <div class="empty-state">
+            <p>🔒 Secure admin access required</p>
+        </div>
+    </div>
+</div>
+
+<style>
+.login-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #2a3942;
+    border-radius: 10px;
+    border: 1px solid #3b4a54;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.admin-theme label {
+    display: block;
+    color: #e9edef;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.admin-theme input[type="text"], 
+.admin-theme input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    background: #111b21;
+    border: 1px solid #3b4a54;
+    border-radius: 8px;
+    color: #e9edef;
+    font-size: 14px;
+}
+
+.admin-theme input[type="text"]:focus, 
+.admin-theme input[type="password"]:focus {
+    outline: none;
+    border-color: #00a884;
+}
+
+.admin-theme input::placeholder {
+    color: #8696a0;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: #00a884;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.login-btn:hover {
+    background: #06cf9c;
+}
+
+.message-input-container {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+</style>

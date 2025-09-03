@@ -75,7 +75,41 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 24 hours
 }));
 
+// Authentication middleware
+function requireAuth(req, res, next) {
+    if (req.session.isAdmin) {
+        return next();
+    }
+    res.redirect('/admin/login');
+}
+
 // Routes
+
+// Admin login page
+app.get('/admin/login', (req, res) => {
+    if (req.session.isAdmin) {
+        return res.redirect('/admin');
+    }
+    res.render('admin-login');
+});
+
+// Admin login handler
+app.post('/admin/login', (req, res) => {
+    const { username, password } = req.body;
+    
+    if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+        req.session.isAdmin = true;
+        res.redirect('/admin');
+    } else {
+        res.redirect('/admin/login?error=invalid');
+    }
+});
+
+// Admin logout
+app.post('/admin/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/admin/login');
+});
 
 // Home page - Anonymous messaging
 app.get('/', async (req, res) => {
@@ -160,7 +194,7 @@ app.post('/send-message', async (req, res) => {
 });
 
 // Admin page
-app.get('/admin', async (req, res) => {
+app.get('/admin', requireAuth, async (req, res) => {
     try {
         const conversationsResult = await pool.query(`
             SELECT 
@@ -184,7 +218,7 @@ app.get('/admin', async (req, res) => {
 });
 
 // View specific conversation
-app.get('/admin/conversation/:id', async (req, res) => {
+app.get('/admin/conversation/:id', requireAuth, async (req, res) => {
     try {
         const conversationId = req.params.id;
         
@@ -215,7 +249,7 @@ app.get('/admin/conversation/:id', async (req, res) => {
 });
 
 // Reply to conversation
-app.post('/admin/reply/:id', async (req, res) => {
+app.post('/admin/reply/:id', requireAuth, async (req, res) => {
     try {
         const conversationId = req.params.id;
         const { reply } = req.body;
