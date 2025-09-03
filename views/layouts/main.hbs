@@ -13,7 +13,7 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f0f2f5;
+            background: #000000;
             min-height: 100vh;
             margin: 0;
             padding: 0;
@@ -22,7 +22,7 @@
         .container {
             max-width: 480px;
             margin: 0 auto;
-            background: white;
+            background: #000000;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,10 +36,10 @@
         }
         
         .header {
-            background: white;
-            color: #262626;
+            background: #1f1f1f;
+            color: #e1e1e1;
             padding: 15px 20px;
-            border-bottom: 1px solid #dbdbdb;
+            border-bottom: 1px solid #2a2a2a;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -64,12 +64,13 @@
             flex-direction: column;
             overflow: hidden;
             padding-bottom: 80px;
+            background: #000000;
         }
         
         .message-form {
             padding: 15px 20px;
-            border-top: 1px solid #dbdbdb;
-            background: white;
+            border-top: 1px solid #2a2a2a;
+            background: #1f1f1f;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -89,7 +90,7 @@
             display: flex;
             align-items: flex-end;
             gap: 10px;
-            background: #f0f2f5;
+            background: #2a2a2a;
             border-radius: 25px;
             padding: 8px 15px;
             min-height: 44px;
@@ -99,6 +100,7 @@
             flex: 1;
             border: none;
             background: transparent;
+            color: #e1e1e1;
             font-size: 14px;
             resize: none;
             min-height: 20px;
@@ -113,7 +115,7 @@
         }
         
         textarea::placeholder {
-            color: #8e8e8e;
+            color: #6a6a6a;
         }
         
         .btn {
@@ -154,6 +156,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            background: #000000;
         }
         
         .message {
@@ -167,22 +170,22 @@
         }
         
         .message.user {
-            background: #0095f6;
-            color: white;
+            background: #1f1f1f;
+            color: #e1e1e1;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
         
         .message.admin {
-            background: #e4e6ea;
-            color: #050505;
+            background: #0b7028;
+            color: #e1e1e1;
             align-self: flex-start;
             border-bottom-left-radius: 4px;
         }
         
         .message-time {
             font-size: 11px;
-            color: #8e8e8e;
+            color: #6a6a6a;
             margin-top: 4px;
             text-align: center;
         }
@@ -197,6 +200,8 @@
             border-radius: 8px;
             font-size: 13px;
             text-align: center;
+            background: #2a2a2a;
+            color: #e1e1e1;
         }
         
         .alert-success {
@@ -271,9 +276,10 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #8e8e8e;
+            color: #6a6a6a;
             font-size: 14px;
             padding: 40px 20px;
+            background: #000000;
         }
         
         @media (max-width: 768px) {
@@ -287,14 +293,14 @@
             }
         }
         
-        /* WhatsApp Dark Theme for Admin Pages */
+        /* Pure Black Theme for Admin Pages */
         .admin-theme {
-            background: #0b141a;
-            color: #e9edef;
+            background: #000000;
+            color: #e1e1e1;
         }
         
         .admin-theme .container {
-            background: #111b21;
+            background: #000000;
             max-width: 100%;
             height: auto;
             min-height: 100vh;
@@ -302,9 +308,9 @@
         }
         
         .admin-theme .header {
-            background: #2a3942;
-            color: #e9edef;
-            border-bottom: 1px solid #3b4a54;
+            background: #1f1f1f;
+            color: #e1e1e1;
+            border-bottom: 1px solid #2a2a2a;
             padding: 16px 20px;
         }
         
@@ -314,8 +320,8 @@
         }
         
         .admin-theme .admin-nav {
-            background: #2a3942;
-            border-bottom: 1px solid #3b4a54;
+            background: #1f1f1f;
+            border-bottom: 1px solid #2a2a2a;
             padding: 12px 20px;
         }
         
@@ -330,7 +336,7 @@
         }
         
         .admin-theme .content {
-            background: #0b141a;
+            background: #000000;
             flex: 1;
             overflow-y: auto;
             min-height: auto;
@@ -343,16 +349,16 @@
         }
         
         .admin-theme .conversation-card {
-            background: #111b21;
+            background: #000000;
             border: none;
-            border-bottom: 1px solid #3b4a54;
+            border-bottom: 1px solid #2a2a2a;
             border-radius: 0;
             padding: 16px 20px;
             transition: background-color 0.3s ease;
         }
         
         .admin-theme .conversation-card:hover {
-            background: #2a3942;
+            background: #1f1f1f;
         }
         
         .admin-theme .conversation-meta {
@@ -362,7 +368,7 @@
         
         .admin-theme .session-id {
             background: transparent;
-            color: #e9edef;
+            color: #e1e1e1;
             font-family: inherit;
             font-size: 16px;
             font-weight: 500;
@@ -383,13 +389,13 @@
         }
         
         .admin-theme .conversation-card p {
-            color: #8696a0;
+            color: #6a6a6a;
             font-size: 14px;
             margin: 2px 0;
         }
         
         .admin-theme .conversation-card strong {
-            color: #8696a0;
+            color: #6a6a6a;
         }
         
         .admin-theme .btn {
@@ -424,8 +430,7 @@
         
         /* WhatsApp Chat Messages for Admin */
         .admin-theme .messages {
-            background: #0b141a;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" opacity="0.05"><rect width="40" height="40" fill="%23e9edef"/></svg>');
+            background: #000000;
             padding: 20px;
             margin-bottom: 80px;
         }
@@ -441,29 +446,29 @@
         }
         
         .admin-theme .message.user {
-            background: #2a3942;
-            color: #e9edef;
+            background: #1f1f1f;
+            color: #e1e1e1;
             align-self: flex-start;
             border-bottom-left-radius: 2px;
         }
         
         .admin-theme .message.admin {
-            background: #005c4b;
-            color: #e9edef;
+            background: #0b7028;
+            color: #e1e1e1;
             align-self: flex-end;
             border-bottom-right-radius: 2px;
         }
         
         .admin-theme .message-time {
-            color: #8696a0;
+            color: #6a6a6a;
             font-size: 11px;
             margin-top: 4px;
             text-align: right;
         }
         
         .admin-theme .message-form {
-            background: #2a3942;
-            border-top: 1px solid #3b4a54;
+            background: #1f1f1f;
+            border-top: 1px solid #2a2a2a;
             padding: 16px 20px;
             position: fixed;
             bottom: 0;
@@ -473,18 +478,18 @@
         }
         
         .admin-theme .message-input-container {
-            background: #2a3942;
-            border: 1px solid #3b4a54;
+            background: #2a2a2a;
+            border: 1px solid #2a2a2a;
             border-radius: 8px;
         }
         
         .admin-theme textarea {
             background: transparent;
-            color: #e9edef;
+            color: #e1e1e1;
         }
         
         .admin-theme textarea::placeholder {
-            color: #8696a0;
+            color: #6a6a6a;
         }
         
         .admin-theme .alert {
@@ -511,18 +516,18 @@
         
         .admin-theme .conversation-info {
             padding: 16px 20px;
-            background: #2a3942;
-            border-bottom: 1px solid #3b4a54;
+            background: #1f1f1f;
+            border-bottom: 1px solid #2a2a2a;
             font-size: 14px;
         }
         
         .admin-theme .conversation-info p {
-            color: #8696a0;
+            color: #6a6a6a;
             margin: 4px 0;
         }
         
         .admin-theme .conversation-info strong {
-            color: #e9edef;
+            color: #e1e1e1;
         }
         
         .logout-btn {
