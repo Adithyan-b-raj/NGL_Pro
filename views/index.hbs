@@ -26,7 +26,7 @@
                     <div class="message {{#if is_admin_reply}}admin{{else}}user{{/if}}">
                         <p class="message-content">{{message}}</p>
                     </div>
-                    <div class="message-time">{{formatDate created_at}}</div>
+                    <div class="message-time" data-timestamp="{{formatDate created_at}}">Loading...</div>
                 {{/each}}
             </div>
         {{else}}
@@ -135,15 +135,9 @@ function addMessageToChat(message, isAdmin) {
     
     const messageTime = document.createElement('div');
     messageTime.className = 'message-time';
-    messageTime.textContent = new Date().toLocaleString('en-IN', {
-        timeZone: 'Asia/Kolkata',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true
-    });
+    // Use current time in user's timezone
+    const now = new Date();
+    messageTime.textContent = formatDateClient(now.toISOString());
     
     messageDiv.appendChild(messageContent);
     messagesContainer.appendChild(messageDiv);
@@ -165,12 +159,18 @@ setInterval(function() {
                 const newMessages = newDoc.querySelector('.messages');
                 const currentMessages = document.querySelector('.messages');
                 
-                if (newMessages && currentMessages) {
-                    // Only update if content changed
-                    if (newMessages.innerHTML !== currentMessages.innerHTML) {
-                        currentMessages.innerHTML = newMessages.innerHTML;
-                        currentMessages.scrollTop = currentMessages.scrollHeight;
-                    }
+                    if (newMessages && currentMessages) {
+                        // Only update if content changed
+                        if (newMessages.innerHTML !== currentMessages.innerHTML) {
+                            currentMessages.innerHTML = newMessages.innerHTML;
+                            // Convert timestamps in the new content
+                            const timeElements = currentMessages.querySelectorAll('.message-time[data-timestamp]');
+                            timeElements.forEach(function(element) {
+                                const timestamp = element.getAttribute('data-timestamp');
+                                element.textContent = formatDateClient(timestamp);
+                            });
+                            currentMessages.scrollTop = currentMessages.scrollHeight;
+                        }
                 } else if (newMessages && !currentMessages) {
                     // First message received, reload page
                     window.location.reload();

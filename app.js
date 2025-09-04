@@ -49,15 +49,16 @@ app.engine('hbs', engine({
     defaultLayout: 'main',
     helpers: {
         formatDate: function(date) {
-            return new Date(date).toLocaleString('en-IN', {
-                timeZone: 'Asia/Kolkata',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true
-            });
+            // Return ISO string for client-side IST conversion
+            const messageDate = new Date(date);
+            
+            // Check if the date is valid
+            if (isNaN(messageDate.getTime())) {
+                return 'Invalid Date';
+            }
+            
+            // Return ISO string so client can convert to IST
+            return messageDate.toISOString();
         }
     }
 }));
@@ -180,10 +181,11 @@ app.post('/send-message', async (req, res) => {
             conversationId = newConvResult.rows[0].id;
         }
         
-        // Insert message
+        // Insert message with current timestamp
+        const currentTime = new Date();
         await pool.query(
-            'INSERT INTO messages (conversation_id, message, is_admin_reply) VALUES ($1, $2, $3)',
-            [conversationId, message.trim(), false]
+            'INSERT INTO messages (conversation_id, message, is_admin_reply, created_at) VALUES ($1, $2, $3, $4)',
+            [conversationId, message.trim(), false, currentTime]
         );
         
         res.redirect('/?success=sent');
@@ -258,10 +260,11 @@ app.post('/admin/reply/:id', requireAuth, async (req, res) => {
             return res.redirect(`/admin/conversation/${conversationId}?error=empty`);
         }
         
-        // Insert admin reply
+        // Insert admin reply with current timestamp
+        const currentTime = new Date();
         await pool.query(
-            'INSERT INTO messages (conversation_id, message, is_admin_reply) VALUES ($1, $2, $3)',
-            [conversationId, reply.trim(), true]
+            'INSERT INTO messages (conversation_id, message, is_admin_reply, created_at) VALUES ($1, $2, $3, $4)',
+            [conversationId, reply.trim(), true, currentTime]
         );
         
         // Update conversation last activity

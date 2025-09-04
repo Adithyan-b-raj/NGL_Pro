@@ -1,29 +1,36 @@
 <div class="container admin-theme">
-    <div class="admin-nav">
-        <a href="/admin">← Chats</a>
-        <form method="POST" action="/admin/logout" style="display: inline; float: right;">
-            <button type="submit" class="btn logout-btn">Logout 🚪</button>
+<script>document.body.classList.add('admin-page');</script>
+    <div class="header">
+        <h1>Admin Dashboard</h1>
+        <form method="POST" action="/admin/logout" style="display: inline;">
+            <button type="submit" class="logout-button">Logout</button>
         </form>
     </div>
     
-    <div class="header">
-        <h1>Admin(Adithyan)</h1>
-    </div>
+    <h2 class="section-title">Active Conversations</h2>
     
     <div class="content">
         {{#if conversations}}
             <div class="conversation-list">
                 {{#each conversations}}
                     <div class="conversation-card">
-                        <div class="conversation-meta">
-                            <span class="session-id">Anonymous User</span>
-                            <span class="message-count">{{message_count}}</span>
+                        <div class="conversation-top">
+                            <div class="conversation-meta">
+                                <span class="user-label">Anonymous User</span>
+                                <div class="message-badge">{{message_count}} messages</div>
+                            </div>
                         </div>
-                        <p><strong>Last seen:</strong> {{formatDate last_activity}}</p>
-                        {{#if last_message_time}}
-                            <p>{{formatDate last_message_time}}</p>
-                        {{/if}}
-                        <a href="/admin/conversation/{{id}}" class="btn">Open Chat</a>
+                        
+                        <div class="session-info">
+                            <p class="session-id">Session: {{id}}</p>
+                        </div>
+                        
+                        <div class="conversation-time-info">
+                            <p class="time-info">Created: {{formatDate created_at}}</p>
+                            <p class="time-info">Last activity: {{formatDate last_activity}}</p>
+                        </div>
+                        
+                        <a href="/admin/conversation/{{id}}" class="view-btn">View Conversation</a>
                     </div>
                 {{/each}}
             </div>

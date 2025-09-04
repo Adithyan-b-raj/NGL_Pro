@@ -1,18 +1,24 @@
-<div class="container admin-theme">
-    <div class="admin-nav">
-        <a href="/admin">← Back</a>
-        <form method="POST" action="/admin/logout" style="display: inline; float: right;">
-            <button type="submit" class="btn logout-btn">Logout 🚪</button>
+<div class="container admin-theme conversation-view">
+<script>document.body.classList.add('admin-page');</script>
+    <div class="header">
+        <div class="header-left">
+            <a href="/admin" class="back-button">← Back</a>
+            <h1>Anonymous User</h1>
+        </div>
+        <form method="POST" action="/admin/logout" style="display: inline;">
+            <button type="submit" class="logout-button">Logout</button>
         </form>
     </div>
     
-    <div class="header">
-        <h1>Anonymous User</h1>
-    </div>
-    
     <div class="conversation-info">
-        <p><strong>Started:</strong> {{formatDate conversation.created_at}}</p>
-        <p><strong>Last seen:</strong> {{formatDate conversation.last_activity}}</p>
+        <div class="info-item">
+            <span class="info-label">Started:</span>
+            <span class="info-value">{{formatDate conversation.created_at}}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Last seen:</span>
+            <span class="info-value">{{formatDate conversation.last_activity}}</span>
+        </div>
     </div>
     
     <div class="content">
@@ -37,7 +43,7 @@
                 {{#each messages}}
                     <div class="message {{#if is_admin_reply}}admin{{else}}user{{/if}}">
                         <p class="message-content">{{message}}</p>
-                        <div class="message-time">{{formatDate created_at}}</div>
+                        <div class="message-time" data-timestamp="{{formatDate created_at}}">Loading...</div>
                     </div>
                 {{/each}}
             </div>
@@ -145,15 +151,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const messageTime = document.createElement('div');
         messageTime.className = 'message-time';
-        messageTime.textContent = new Date().toLocaleString('en-IN', {
-            timeZone: 'Asia/Kolkata',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        });
+        // Use current time in user's timezone
+        const now = new Date();
+        messageTime.textContent = formatDateClient(now.toISOString());
         
         messageDiv.appendChild(messageContent);
         messagesContainer.appendChild(messageDiv);
@@ -184,6 +184,13 @@ document.addEventListener('DOMContentLoaded', function() {
                             const wasAtBottom = scrollTop + clientHeight >= scrollHeight - 5;
                             
                             currentMessages.innerHTML = newMessages.innerHTML;
+                            
+                            // Convert timestamps in the new content
+                            const timeElements = currentMessages.querySelectorAll('.message-time[data-timestamp]');
+                            timeElements.forEach(function(element) {
+                                const timestamp = element.getAttribute('data-timestamp');
+                                element.textContent = formatDateClient(timestamp);
+                            });
                             
                             // Maintain scroll position or auto-scroll if was at bottom
                             if (wasAtBottom) {
